@@ -1,27 +1,25 @@
 using System.Windows.Forms;
+using DBMSLab.database;
 
 namespace DBMSLab
 {
     public partial class MainWindow : Form
     {
+        private ElectronicsDataSet dataSet;
+        private ElectronicsDataAdapter dataAdapter;
+
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void reservationsBindingNavigatorSaveItem_Click(object sender, System.EventArgs e)
-        {
-            this.Validate();
-            this.reservationsBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.electronics_ShopDataSet);
-
+            dataSet = new ElectronicsDataSet();
+            dataAdapter = new ElectronicsDataAdapter();
+            var ordersBindingSource = new BindingSource(dataSet, "Orders");
+            ordersGridView.DataSource = ordersBindingSource;
         }
 
         private void MainWindow_Load(object sender, System.EventArgs e)
         {
-            // TODO: This line of code loads data into the 'electronics_ShopDataSet.Reservations' table. You can move, or remove it, as needed.
-            this.reservationsTableAdapter.Fill(this.electronics_ShopDataSet.Reservations);
-
+            dataAdapter.OrdersDataAdapter.Fill(dataSet.Tables["Orders"]);
         }
     }
 }

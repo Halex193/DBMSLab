@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="database\ElectronicsDataAdapter.cs" />
+    <Compile Include="database\ElectronicsDataSet.cs" />
+    <Compile Include="database\ElectronicsDatabaseConnector.cs" />
     <Compile Include="Electronics_ShopDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
