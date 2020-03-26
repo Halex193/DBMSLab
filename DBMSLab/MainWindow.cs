@@ -1,3 +1,4 @@
+using System.Data;
 using System.Windows.Forms;
 using DBMSLab.database;
 
@@ -19,6 +20,7 @@ namespace DBMSLab
 
         private void MainWindow_Load(object sender, System.EventArgs e)
         {
+            dataAdapter.OrdersDataAdapter.Fill(dataSet.Tables["Customers"]);
             dataAdapter.OrdersDataAdapter.Fill(dataSet.Tables["Orders"]);
         }
     }
