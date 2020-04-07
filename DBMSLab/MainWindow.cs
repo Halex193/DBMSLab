@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Xml.Schema;
 using DBMSLab.database;
 
 namespace DBMSLab
@@ -20,11 +21,28 @@ namespace DBMSLab
             dataSet = new DataSet();
             dataAdapter = new ElectronicsDataAdapter();
             refreshData();
-            ElectronicsDataSet.addDataSetRelation(dataSet, ConfigurationManager.AppSettings["pk_field"], ConfigurationManager.AppSettings["fk_field"]);
+            ElectronicsDataSet.addDataSetRelation(dataSet, ConfigurationManager.AppSettings["pk_field"],
+                ConfigurationManager.AppSettings["fk_field"]);
             var parentBindingSource = new BindingSource(dataSet, ConfigurationManager.AppSettings["parentTable"]);
             var childBindingSource = new BindingSource(parentBindingSource, "ParentChild");
-            customersGridView.DataSource = parentBindingSource;
-            ordersGridView.DataSource = childBindingSource;
+            parentGridView.DataSource = parentBindingSource;
+            childGridView.DataSource = childBindingSource;
+            changeHeaders();
+        }
+
+        private void changeHeaders()
+        {
+            var headers = ConfigurationManager.AppSettings["parentHeaders"].Split(',');
+            for (int i = 0; i < headers.Length; i++)
+            {
+                parentGridView.Columns[i].HeaderText = headers[i];
+            }
+
+            headers = ConfigurationManager.AppSettings["childHeaders"].Split(',');
+            for (int i = 0; i < headers.Length; i++)
+            {
+                childGridView.Columns[i].HeaderText = headers[i];
+            }
         }
 
         private void MainWindow_Load(object sender, System.EventArgs e)
@@ -40,7 +58,7 @@ namespace DBMSLab
                 dataAdapter.ParentAdapter.Fill(dataSet, ConfigurationManager.AppSettings["parentTable"]);
                 dataAdapter.ChildAdapter.Fill(dataSet, ConfigurationManager.AppSettings["childTable"]);
             }
-            catch (SqlException exception)
+            catch (SqlException)
             {
                 MessageBox.Show("There was an error communicating with the database", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -55,9 +73,10 @@ namespace DBMSLab
                 changesLabel.Visible = true;
                 refreshData();
             }
-            catch (SqlException exception)
+            catch (SqlException)
             {
-                MessageBox.Show("There was an error communicating with the database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There was an error communicating with the database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }

@@ -33,21 +33,12 @@ namespace DBMSLab
         {
             this.labelParent = new System.Windows.Forms.Label();
             this.labelChild = new System.Windows.Forms.Label();
-            this.ordersGridView = new System.Windows.Forms.DataGridView();
-            this.order_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employee_helper_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.progress = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.customersGridView = new System.Windows.Forms.DataGridView();
-            this.customer_id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fidelity_points = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.childGridView = new System.Windows.Forms.DataGridView();
+            this.parentGridView = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.changesLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize) (this.ordersGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.customersGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.childGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.parentGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // labelParent
@@ -66,98 +57,26 @@ namespace DBMSLab
             this.labelChild.TabIndex = 4;
             this.labelChild.Text = "Orders";
             // 
-            // ordersGridView
+            // childGridView
             // 
-            this.ordersGridView.ColumnHeadersHeightSizeMode =
+            this.childGridView.ColumnHeadersHeightSizeMode =
                 System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ordersGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
-                {this.order_id, this.customer_id, this.date, this.employee_helper_id, this.progress});
-            this.ordersGridView.Location = new System.Drawing.Point(12, 297);
-            this.ordersGridView.Name = "ordersGridView";
-            this.ordersGridView.Size = new System.Drawing.Size(831, 223);
-            this.ordersGridView.TabIndex = 0;
+            this.childGridView.Location = new System.Drawing.Point(12, 297);
+            this.childGridView.Name = "childGridView";
+            this.childGridView.Size = new System.Drawing.Size(831, 223);
+            this.childGridView.TabIndex = 0;
             // 
-            // order_id
+            // parentGridView
             // 
-            this.order_id.DataPropertyName = "order_id";
-            this.order_id.Frozen = true;
-            this.order_id.HeaderText = "Order ID";
-            this.order_id.Name = "order_id";
-            this.order_id.ReadOnly = true;
-            // 
-            // customer_id
-            // 
-            this.customer_id.DataPropertyName = "customer_id";
-            this.customer_id.Frozen = true;
-            this.customer_id.HeaderText = "Customer ID";
-            this.customer_id.Name = "customer_id";
-            this.customer_id.ReadOnly = true;
-            // 
-            // date
-            // 
-            this.date.DataPropertyName = "date";
-            this.date.HeaderText = "Date";
-            this.date.Name = "date";
-            // 
-            // employee_helper_id
-            // 
-            this.employee_helper_id.DataPropertyName = "employee_helper_id";
-            this.employee_helper_id.HeaderText = "Employee Helper ID";
-            this.employee_helper_id.Name = "employee_helper_id";
-            this.employee_helper_id.Width = 200;
-            // 
-            // progress
-            // 
-            this.progress.DataPropertyName = "progress";
-            this.progress.HeaderText = "Progress";
-            this.progress.Items.AddRange(new object[] {"delivered", "not delivered", "in progress"});
-            this.progress.Name = "progress";
-            this.progress.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.progress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // customersGridView
-            // 
-            this.customersGridView.AllowUserToAddRows = false;
-            this.customersGridView.AllowUserToDeleteRows = false;
-            this.customersGridView.ColumnHeadersHeightSizeMode =
+            this.parentGridView.AllowUserToAddRows = false;
+            this.parentGridView.AllowUserToDeleteRows = false;
+            this.parentGridView.ColumnHeadersHeightSizeMode =
                 System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customersGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
-                {this.customer_id2, this.name, this.fidelity_points, this.email});
-            this.customersGridView.Location = new System.Drawing.Point(12, 42);
-            this.customersGridView.Name = "customersGridView";
-            this.customersGridView.ReadOnly = true;
-            this.customersGridView.Size = new System.Drawing.Size(831, 192);
-            this.customersGridView.TabIndex = 1;
-            // 
-            // customer_id2
-            // 
-            this.customer_id2.DataPropertyName = "customer_id";
-            this.customer_id2.HeaderText = "Customer ID";
-            this.customer_id2.Name = "customer_id2";
-            this.customer_id2.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // fidelity_points
-            // 
-            this.fidelity_points.DataPropertyName = "fidelity_points";
-            this.fidelity_points.HeaderText = "Fidelity Points";
-            this.fidelity_points.Name = "fidelity_points";
-            this.fidelity_points.ReadOnly = true;
-            this.fidelity_points.Width = 200;
-            // 
-            // email
-            // 
-            this.email.DataPropertyName = "email";
-            this.email.HeaderText = "Email";
-            this.email.Name = "email";
-            this.email.ReadOnly = true;
-            this.email.Width = 200;
+            this.parentGridView.Location = new System.Drawing.Point(12, 42);
+            this.parentGridView.Name = "parentGridView";
+            this.parentGridView.ReadOnly = true;
+            this.parentGridView.Size = new System.Drawing.Size(831, 192);
+            this.parentGridView.TabIndex = 1;
             // 
             // button1
             // 
@@ -189,33 +108,24 @@ namespace DBMSLab
             this.Controls.Add(this.changesLabel);
             this.Controls.Add(this.labelParent);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.customersGridView);
-            this.Controls.Add(this.ordersGridView);
+            this.Controls.Add(this.parentGridView);
+            this.Controls.Add(this.childGridView);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainWindow";
             this.Text = "MainWindow";
             this.Load += new System.EventHandler(this.MainWindow_Load);
-            ((System.ComponentModel.ISupportInitialize) (this.ordersGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.customersGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.childGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.parentGridView)).EndInit();
             this.ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn employee_helper_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customer_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn order_id;
-        private System.Windows.Forms.DataGridView ordersGridView;
-        private System.Windows.Forms.DataGridView customersGridView;
+        private System.Windows.Forms.DataGridView parentGridView;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fidelity_points;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customer_id2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn progress;
         private System.Windows.Forms.Label changesLabel;
         private System.Windows.Forms.Label labelChild;
         private System.Windows.Forms.Label labelParent;
+        private System.Windows.Forms.DataGridView childGridView;
     }
 }
