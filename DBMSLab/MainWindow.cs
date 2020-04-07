@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -8,30 +9,41 @@ namespace DBMSLab
 {
     public partial class MainWindow : Form
     {
-        private ElectronicsDataSet dataSet;
+        private DataSet dataSet;
         private ElectronicsDataAdapter dataAdapter;
 
         public MainWindow()
         {
             InitializeComponent();
-            dataSet = new ElectronicsDataSet();
+            labelParent.Text = ConfigurationManager.AppSettings["parentTable"];
+            labelChild.Text = ConfigurationManager.AppSettings["childTable"];
+            dataSet = new DataSet();
             dataAdapter = new ElectronicsDataAdapter();
-            var customersBindingSource = new BindingSource(dataSet, "Customers");
-            var ordersBindingSource = new BindingSource(customersBindingSource, "CustomerOrders");
-            customersGridView.DataSource = customersBindingSource;
-            ordersGridView.DataSource = ordersBindingSource;
+            refreshData();
+            ElectronicsDataSet.addDataSetRelation(dataSet, ConfigurationManager.AppSettings["pk_field"], ConfigurationManager.AppSettings["fk_field"]);
+            var parentBindingSource = new BindingSource(dataSet, ConfigurationManager.AppSettings["parentTable"]);
+            var childBindingSource = new BindingSource(parentBindingSource, "ParentChild");
+            customersGridView.DataSource = parentBindingSource;
+            ordersGridView.DataSource = childBindingSource;
         }
 
         private void MainWindow_Load(object sender, System.EventArgs e)
         {
+            refreshData();
+        }
+
+        private void refreshData()
+        {
+            dataSet.Clear();
             try
             {
-                dataAdapter.CustomersDataAdapter.Fill(dataSet.Tables["Customers"]);
-                dataAdapter.OrdersDataAdapter.Fill(dataSet.Tables["Orders"]);
+                dataAdapter.ParentAdapter.Fill(dataSet, ConfigurationManager.AppSettings["parentTable"]);
+                dataAdapter.ChildAdapter.Fill(dataSet, ConfigurationManager.AppSettings["childTable"]);
             }
             catch (SqlException exception)
             {
-                MessageBox.Show("There was an error communicating with the database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There was an error communicating with the database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -39,9 +51,9 @@ namespace DBMSLab
         {
             try
             {
-                dataAdapter.OrdersDataAdapter.Update(dataSet, "Orders");
-                dataAdapter.OrdersDataAdapter.Fill(dataSet, "Orders");
+                dataAdapter.ChildAdapter.Update(dataSet, ConfigurationManager.AppSettings["childTable"]);
                 changesLabel.Visible = true;
+                refreshData();
             }
             catch (SqlException exception)
             {

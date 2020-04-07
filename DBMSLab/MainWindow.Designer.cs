@@ -31,8 +31,8 @@ namespace DBMSLab
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label1;
-            System.Windows.Forms.Label label2;
+            this.labelParent = new System.Windows.Forms.Label();
+            this.labelChild = new System.Windows.Forms.Label();
             this.ordersGridView = new System.Windows.Forms.DataGridView();
             this.order_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,27 +46,25 @@ namespace DBMSLab
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.changesLabel = new System.Windows.Forms.Label();
-            label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize) (this.ordersGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.customersGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelParent
             // 
-            label1.Location = new System.Drawing.Point(12, 16);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(85, 22);
-            label1.TabIndex = 3;
-            label1.Text = "Customers";
+            this.labelParent.Location = new System.Drawing.Point(12, 16);
+            this.labelParent.Name = "labelParent";
+            this.labelParent.Size = new System.Drawing.Size(85, 22);
+            this.labelParent.TabIndex = 3;
+            this.labelParent.Text = "Customers";
             // 
-            // label2
+            // labelChild
             // 
-            label2.Location = new System.Drawing.Point(12, 272);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(85, 22);
-            label2.TabIndex = 4;
-            label2.Text = "Orders";
+            this.labelChild.Location = new System.Drawing.Point(12, 272);
+            this.labelChild.Name = "labelChild";
+            this.labelChild.Size = new System.Drawing.Size(85, 22);
+            this.labelChild.TabIndex = 4;
+            this.labelChild.Text = "Orders";
             // 
             // ordersGridView
             // 
@@ -187,9 +185,9 @@ namespace DBMSLab
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 532);
-            this.Controls.Add(label2);
+            this.Controls.Add(this.labelChild);
             this.Controls.Add(this.changesLabel);
-            this.Controls.Add(label1);
+            this.Controls.Add(this.labelParent);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.customersGridView);
             this.Controls.Add(this.ordersGridView);
@@ -217,5 +215,7 @@ namespace DBMSLab
         private System.Windows.Forms.DataGridViewTextBoxColumn customer_id2;
         private System.Windows.Forms.DataGridViewComboBoxColumn progress;
         private System.Windows.Forms.Label changesLabel;
+        private System.Windows.Forms.Label labelChild;
+        private System.Windows.Forms.Label labelParent;
     }
 }
